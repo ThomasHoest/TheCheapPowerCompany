@@ -47,12 +47,12 @@ the system. The Marketing Site is read-only marketing plus a single
 |---|---|---|
 | Platform | Web (responsive single-site) | Reach all Danish consumers; mobile-first traffic expected |
 | Primary language | Danish (da-DK) | Target market is Denmark |
-| Hosting | Static-site / SSR-capable host (e.g. Vercel, Netlify, or equivalent) | Fast TTFB, low ops overhead, cheap |
+| Hosting | Azure Static Web Apps (Standard tier, West Europe) | Azure platform decision (ADR-001); ~$9/month with SSR, CDN, and PR previews included (ADR-002) |
 | Live price data source | Internal pricing service (which itself wraps energinet.dk + markup) | The Marketing Site never calls energinet.dk directly; it consumes the same internal price endpoint the app uses |
 | Signup integration | Hand-off to the Onboarding Flow at a known URL (e.g. `/signup`) | Decouples marketing from onboarding implementation |
 | Payment integration | None directly — MobilePay subscription is captured during Onboarding | Keeps Marketing Site free of PCI/payment scope |
 | Identity | None directly — MitID is invoked during Onboarding | Marketing Site is fully anonymous |
-| Analytics | Privacy-respecting analytics (e.g. Plausible, Umami, or self-hosted) | GDPR compliance; minimise cookie banners |
+| Analytics | Plausible (cookie-less, GDPR-friendly; self-hosted option available) | No cookie consent banner required for analytics (ADR-002) |
 
 ## User Stories
 
@@ -227,32 +227,21 @@ the system. The Marketing Site is read-only marketing plus a single
 
 ## Open Questions
 
-1. **Exact markup amount** — Owner: Product / Commercial. Default assumption:
-   the spec uses a placeholder; the live number must be locked before launch.
+The following questions remain open and must be resolved before launch. All
+engineering-owned questions have been resolved in ADR-002.
+
+1. **Exact markup amount** — Owner: Product / Commercial. Placeholder in
+   `content/pricing.ts`. Must be locked before launch.
 2. **Subscription fee amounts (weekly and monthly)** — Owner: Product /
-   Commercial. Default assumption: placeholder copy until set.
+   Commercial. Placeholder in `content/pricing.ts`. Must be locked before launch.
 3. **Is there any binding period?** — Owner: Legal / Product. Default
-   assumption: "ingen binding" (no binding period). Confirm before publishing.
+   confirmed: "ingen binding" (no binding period). Legal must confirm before publishing.
 4. **Companion app store availability at launch** — Owner: App team.
-   Default assumption: "Coming soon" badges if not yet published.
-5. **Analytics vendor choice** — Owner: Engineering. Default assumption:
-   Plausible (cookie-less, GDPR-friendly).
-6. **Hosting choice** — Owner: Engineering. Default assumption: Vercel or
-   Netlify for ease of deploy.
-7. **Is the Onboarding Flow a separate domain / subdomain or a path on the
-   marketing domain?** — Owner: Engineering / Architecture. Default
-   assumption: same domain, `/signup` path.
-8. **Should we show a 24-hour spot-price sparkline in the hero?** — Owner:
-   Design / Product. Default assumption: defer to v1.1; ship v1 with just
-   the current number.
-9. **Postal-code-based price estimate** — Owner: Product. Default
-   assumption: out of scope for v1; revisit in v2.
-10. **English-language version** — Owner: Product. Default assumption:
-    Danish-only at launch.
+   Default: "Kommer snart" badges. Toggle to live badges via env var when store URLs available.
 11. **CVR number and legal entity name to display in footer** — Owner:
-    Founders / Legal. Default assumption: placeholder until incorporated.
-12. **FAQ content** — Owner: Product / Support. Default assumption: the
-    spec writer drafts a starter set; product owner reviews before launch.
+    Founders / Legal. Placeholder in `content/legal.ts` until company incorporated.
+12. **FAQ content** — Owner: Product / Support. Spec-writer starter set
+    (5 Q&A) in `content/faq.ts`; product owner reviews and extends before launch.
 
 ## Resolved Decisions
 
@@ -265,3 +254,9 @@ the system. The Marketing Site is read-only marketing plus a single
 | Payment capture on the marketing site? | No — MobilePay subscription is captured in Onboarding. |
 | Mobile vs desktop priority | Mobile-first; desktop must still look great. |
 | Number of primary CTAs | One label, one colour, repeated. No competing CTAs. |
+| Hosting choice (Q6) | Azure Static Web Apps Standard tier, West Europe. ~$9/month. SSR via managed Functions, CDN included, PR preview channels built-in. See ADR-002. |
+| Analytics vendor (Q5) | Plausible (cookie-less). No consent banner required for analytics. |
+| Onboarding URL structure (Q7) | Same primary domain, `/signup` path. `NEXT_PUBLIC_ONBOARDING_URL=https://tcpc.dk/signup`. See ADR-002. |
+| 24-hour sparkline in hero (Q8) | Deferred to v1.1. Ship with current rate number and timestamp only. |
+| Postal-code price estimate (Q9) | Deferred to v2. |
+| English-language version (Q10) | Deferred to v2. Danish-only at launch. |
