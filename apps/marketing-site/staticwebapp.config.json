@@ -1,0 +1,24 @@
+{
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+  },
+  "navigationFallback": {
+    "rewrite": "/404",
+    "exclude": ["/api/*", "/_next/*", "/favicon.ico", "*.{css,js,png,jpg,svg,ico,json}"]
+  },
+  "routes": [
+    {
+      "route": "/health",
+      "statusCode": 200
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404",
+      "statusCode": 404
+    }
+  }
+}

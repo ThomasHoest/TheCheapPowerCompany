@@ -1,0 +1,123 @@
+.section {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 143, 78, 0.06) 0%,
+    rgba(124, 214, 166, 0.06) 100%
+  );
+  padding-top: var(--layout-section-y-mobile);
+  padding-bottom: var(--space-7);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.eyebrow {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.headline {
+  font-size: clamp(var(--font-size-4xl), 5vw + 1rem, var(--font-size-5xl));
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--font-line-tightest);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.subheadline {
+  font-size: var(--font-size-md);
+  line-height: var(--font-line-normal);
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin: 0;
+}
+
+.mobilePriceSlot {
+  display: block;
+}
+
+.ctaWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trustItem {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.trustItem::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brand-primary);
+  flex-shrink: 0;
+}
+
+.trustItem:first-child::before {
+  display: none;
+}
+
+.desktopPriceSlot {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .section {
+    padding-top: var(--layout-section-y-desktop);
+  }
+
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .content {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+
+  .mobilePriceSlot {
+    display: none;
+  }
+
+  .desktopPriceSlot {
+    display: flex;
+    flex: 0 0 45%;
+    max-width: 45%;
+    justify-content: flex-end;
+  }
+
+  .subheadline {
+    font-size: var(--font-size-lg);
+  }
+}

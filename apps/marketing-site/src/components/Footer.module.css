@@ -1,0 +1,120 @@
+.footer {
+  background: var(--color-surface-inverse);
+  color: var(--color-text-on-inverse);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logo {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-brand-gradient-to);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.logo:hover {
+  color: var(--color-text-on-inverse);
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-on-inverse);
+  opacity: 0.7;
+  margin: 0;
+  line-height: var(--font-line-normal);
+}
+
+.cvr {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-on-inverse);
+  opacity: 0.5;
+  margin: 0;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.linkGroupHeading {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-on-inverse);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.link {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-on-inverse);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 120ms ease, color 120ms ease;
+}
+
+.link:hover {
+  opacity: 1;
+  color: var(--color-brand-gradient-to);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.bottom {
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.copyright {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-on-inverse);
+  opacity: 0.5;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}

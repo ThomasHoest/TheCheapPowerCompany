@@ -1,0 +1,20 @@
+.finalCta {
+  background: var(--color-surface-inverse);
+  padding-top: var(--layout-section-y-mobile);
+  padding-bottom: var(--layout-section-y-mobile);
+  text-align: center;
+}
+
+.finalCtaHeading {
+  font-size: clamp(var(--font-size-2xl), 3vw + 0.5rem, var(--font-size-3xl));
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-on-inverse);
+  margin: 0 0 var(--space-6);
+}
+
+@media (min-width: 1200px) {
+  .finalCta {
+    padding-top: var(--layout-section-y-desktop);
+    padding-bottom: var(--layout-section-y-desktop);
+  }
+}
