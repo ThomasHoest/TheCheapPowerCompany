@@ -41,7 +41,8 @@ describe('formatUpdatedAt', () => {
   it('contains correct hour digits', () => {
     const iso = new Date('2026-04-29T11:30:00.000Z').toISOString();
     const result = formatUpdatedAt(iso);
-    expect(result).toMatch(/\d{2}:\d{2}/);
+    // da-DK time format uses '.' as separator (e.g. "13.30"), not ':'
+    expect(result).toMatch(/\d{2}[.:]\d{2}/);
   });
 
   it('starts with "Opdateret"', () => {

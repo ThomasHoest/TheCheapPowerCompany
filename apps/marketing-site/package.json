@@ -6,7 +6,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--localstorage-file=/tmp/next-localstorage.json' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -15,7 +15,7 @@
     "lighthouse:ci": "lhci autorun"
   },
   "dependencies": {
-    "next": "15.3.1",
+    "next": "15.3.9",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
