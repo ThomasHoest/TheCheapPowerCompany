@@ -1,0 +1,25 @@
+.disabledWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.disabledPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-text-disabled);
+  color: var(--color-text-on-brand);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.disabledMessage {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
