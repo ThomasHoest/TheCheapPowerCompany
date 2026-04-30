@@ -23,11 +23,18 @@ LOCATION="westeurope"
 PARAM_FILE="${ENV}.bicepparam"
 
 # ---------------------------------------------------------------------------
-# Secrets — source from env vars or a secrets manager, never hard-code.
+# Secrets — set these in your shell before running, never hard-code.
+#
+#   export BACKEND_PRICE_API_BASE_URL="https://api.staging.tcpc.dk/v1"
 # ---------------------------------------------------------------------------
 
-PRICE_API_URL="${BACKEND_PRICE_API_BASE_URL:?Set BACKEND_PRICE_API_BASE_URL}"
-GITHUB_PAT="${GITHUB_PAT:?Set GITHUB_PAT (fine-grained PAT with repo read access)}"
+PRICE_API_URL="${BACKEND_PRICE_API_BASE_URL:-}"
+
+if [[ -z "$PRICE_API_URL" ]]; then
+  echo "Error: BACKEND_PRICE_API_BASE_URL is not set."
+  echo "  export BACKEND_PRICE_API_BASE_URL=\"https://api.tcpc.dk/v1\""
+  exit 1
+fi
 
 # ---------------------------------------------------------------------------
 # 1. Create resource group (idempotent)
@@ -49,9 +56,6 @@ OUTPUTS=$(az deployment group create \
   --resource-group "$RESOURCE_GROUP" \
   --template-file main.bicep \
   --parameters "$PARAM_FILE" \
-  --parameters \
-    backendPriceApiUrl="$PRICE_API_URL" \
-    repositoryToken="$GITHUB_PAT" \
   --output json)
 
 DEFAULT_HOSTNAME=$(echo "$OUTPUTS" | jq -r '.properties.outputs.defaultHostname.value')

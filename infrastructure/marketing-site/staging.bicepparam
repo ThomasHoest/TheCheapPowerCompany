@@ -8,9 +8,10 @@ using './main.bicep'
 
 param name = 'swa-tcpc-marketing-staging'
 param branch = 'develop'
-param customDomain = 'staging.tcpc.dk'
+// customDomain = 'staging.tcpc.dk'   ← add back after CNAME is created in DNS
 param onboardingUrl = 'https://staging.tcpc.dk/signup'
 param signupDisabled = 'false'
+param backendPriceApiUrl = readEnvironmentVariable('BACKEND_PRICE_API_BASE_URL')
 param tags = {
   project: 'tcpc'
   component: 'marketing-site'

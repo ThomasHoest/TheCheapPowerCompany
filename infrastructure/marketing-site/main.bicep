@@ -97,6 +97,7 @@ resource domain 'Microsoft.Web/staticSites/customDomains@2023-01-01' = if (!empt
 output defaultHostname string = swa.properties.defaultHostname
 
 @description('Deployment API token — add this as AZURE_STATIC_WEB_APPS_API_TOKEN in GitHub secrets.')
+#disable-next-line outputs-should-not-contain-secrets
 output deploymentToken string = swa.listSecrets().properties.apiKey
 
 @description('Resource name for reference in CI scripts.')

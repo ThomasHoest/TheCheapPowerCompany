@@ -23,20 +23,17 @@ $Location      = 'westeurope'
 $ParamFile     = "$Environment.bicepparam"
 
 # ---------------------------------------------------------------------------
-# Secrets — read from environment variables, never hard-coded.
-# Set these in your shell before running:
-#   $env:BACKEND_PRICE_API_BASE_URL = 'https://api.tcpc.dk/v1'
-#   $env:GITHUB_PAT = 'github_pat_...'
+# Secrets — set these in your shell before running, never hard-coded.
+#
+#   $env:BACKEND_PRICE_API_BASE_URL = 'https://api.staging.tcpc.dk/v1'
 # ---------------------------------------------------------------------------
 
 $PriceApiUrl = $env:BACKEND_PRICE_API_BASE_URL
-$GithubPat   = $env:GITHUB_PAT
 
 if (-not $PriceApiUrl) {
-    Write-Error 'Set $env:BACKEND_PRICE_API_BASE_URL before running.'
-}
-if (-not $GithubPat) {
-    Write-Error 'Set $env:GITHUB_PAT (fine-grained PAT with repo read access) before running.'
+    Write-Host 'Error: BACKEND_PRICE_API_BASE_URL is not set.'
+    Write-Host '  $env:BACKEND_PRICE_API_BASE_URL = "https://api.tcpc.dk/v1"'
+    exit 1
 }
 
 # ---------------------------------------------------------------------------
@@ -59,7 +56,6 @@ $OutputsJson = az deployment group create `
     --resource-group $ResourceGroup `
     --template-file main.bicep `
     --parameters $ParamFile `
-    --parameters backendPriceApiUrl=$PriceApiUrl repositoryToken=$GithubPat `
     --output json
 
 $Outputs         = $OutputsJson | ConvertFrom-Json
