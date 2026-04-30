@@ -63,7 +63,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
           app_location: apps/marketing-site
-          output_location: apps/marketing-site/.next
+          output_location: .next
+          skip_app_build: true
           deployment_environment: >-
             ${{
               github.ref == 'refs/heads/main' && 'production' ||
