@@ -16,8 +16,10 @@ export default function PriceDisplayClient({ initialResult, children }: Props) {
   const [mounted, setMounted] = useState(false);
 
   const refresh = useCallback(async () => {
+    const apiUrl = process.env.NEXT_PUBLIC_BACKEND_PRICE_API_BASE_URL;
+    if (!apiUrl) return;
     try {
-      const res = await fetch('/api/price');
+      const res = await fetch(`${apiUrl}/price/current`);
       if (!res.ok) {
         setResult({ ok: false, error: 'upstream' });
         return;
