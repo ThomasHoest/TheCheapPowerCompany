@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { da } from '@/content/da';
 import { COMPANY_NAME, CVR_NUMBER, CONTACT_EMAIL, FOUNDED_YEAR } from '@/content/legal';
 import styles from './Footer.module.css';
@@ -8,9 +9,9 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brand}>
-            <a href="/" className={styles.logo}>
+            <Link href="/" className={styles.logo}>
               tcpc
-            </a>
+            </Link>
             <p className={styles.tagline}>{da.footer.tagline}</p>
             <p className={styles.cvr}>CVR {CVR_NUMBER}</p>
           </div>

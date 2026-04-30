@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { da } from '@/content/da';
 import SignupCTA from './SignupCTA';
 import NavBarClient from './NavBarClient';
@@ -8,9 +9,9 @@ export default function NavBar() {
     <header className={styles.header}>
       <NavBarClient>
         <div className={styles.inner}>
-          <a href="/" className={styles.logo} aria-label="The Cheap Power Company — forside">
+          <Link href="/" className={styles.logo} aria-label="The Cheap Power Company — forside">
             tcpc
-          </a>
+          </Link>
 
           <nav className={styles.desktopNav} aria-label="Primær navigation">
             <ul className={styles.navList}>
