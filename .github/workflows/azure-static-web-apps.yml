@@ -73,7 +73,7 @@ jobs:
             }}
 
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: ./node_modules/.bin/playwright install --with-deps chromium
         working-directory: ${{ env.WORKING_DIR }}
         if: steps.deploy.outputs.static_web_app_url != ''
 
