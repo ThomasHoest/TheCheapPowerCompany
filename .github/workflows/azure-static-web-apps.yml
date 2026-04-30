@@ -51,8 +51,8 @@ jobs:
         run: pnpm build
         working-directory: ${{ env.WORKING_DIR }}
         env:
-          NEXT_PUBLIC_ONBOARDING_URL: ${{ secrets.NEXT_PUBLIC_ONBOARDING_URL }}
-          NEXT_PUBLIC_BACKEND_PRICE_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_PRICE_API_BASE_URL }}
+          NEXT_PUBLIC_ONBOARDING_URL: ${{ secrets.NEXT_PUBLIC_ONBOARDING_URL || 'https://tcpc.dk/signup' }}
+          NEXT_PUBLIC_BACKEND_PRICE_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_PRICE_API_BASE_URL || 'https://api.tcpc.dk/v1' }}
           NEXT_PUBLIC_SIGNUP_DISABLED: 'false'
 
       - name: Deploy to Azure Static Web Apps
